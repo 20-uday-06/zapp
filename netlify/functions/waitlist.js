@@ -32,7 +32,7 @@ exports.handler = async (event, context) => {
     await client.connect();
     
     // Select database and collection
-    const db = client.db('zapp');
+    const db = client.db('gemini-ds-copilot');
     const collection = data.type === 'business' ? 
       db.collection('business_waitlist') : 
       db.collection('user_waitlist');

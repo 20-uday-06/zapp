@@ -11,7 +11,7 @@ If you want to test the website locally before deploying:
 2. Run: `npm install`
 3. Create `.env` file (not tracked by git):
    ```
-   MONGODB_URI=mongodb+srv://udaytyagi:YOUR_PASSWORD@cluster0.4vyv1dd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+   MONGODB_URI=mongodb+srv://udaytyagi:uday2006@cluster0.4vyv1dd.mongodb.net/gemini-ds-copilot?retryWrites=true&w=majority&appName=Cluster0
    ```
 4. Run: `npm run dev`
 5. Open: http://localhost:8888
