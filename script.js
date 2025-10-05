@@ -167,7 +167,7 @@ document.querySelector('.waitlist-form').addEventListener('submit', async (e) =>
     
     try {
         // Send data to backend
-        const response = await fetch('/.netlify/functions/waitlist', {
+        const response = await fetch('/.netlify/functions/waitlist-simple', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -226,7 +226,7 @@ document.querySelector('.business-form').addEventListener('submit', async (e) =>
     
     try {
         // Send data to backend
-        const response = await fetch('/.netlify/functions/waitlist', {
+        const response = await fetch('/.netlify/functions/waitlist-simple', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
