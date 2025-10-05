@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zapp - One App. Every Appointment.</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="logo_cropped.png" alt="Zapp Logo" class="logo">
+                <span class="nav-brand">Zapp</span>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#how-it-works" class="nav-link">How It Works</a>
+                <a href="#services" class="nav-link">Services</a>
+                <a href="#businesses" class="nav-link">For Businesses</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" onclick="openWaitlistModal()">Join Waitlist</button>
+                <button class="btn btn-primary" onclick="scrollToSection('businesses')">For Businesses</button>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="gradient-text">One App.</span>
+                    <span class="hero-title-line">Every Appointment.</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Eliminate the frustration of managing multiple booking apps. 
+                    Healthcare, beauty, restaurants, fitness – all in one place.
+                </p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary btn-large" onclick="openWaitlistModal()">
+                        <i class="fas fa-rocket"></i>
+                        Join Waitlist
+                    </button>
+                    <button class="btn btn-secondary btn-large" onclick="scrollToSection('businesses')">
+                        <i class="fas fa-briefcase"></i>
+                        For Businesses
+                    </button>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number" data-target="50000">0</span>
+                        <span class="stat-label">Users Waiting</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" data-target="1000">0</span>
+                        <span class="stat-label">Businesses Ready</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" data-target="25">0</span>
+                        <span class="stat-label">Cities</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="service-icons">
+                    <div class="service-icon" style="--delay: 0s">
+                        <i class="fas fa-stethoscope"></i>
+                        <span>Healthcare</span>
+                    </div>
+                    <div class="service-icon" style="--delay: 0.2s">
+                        <i class="fas fa-cut"></i>
+                        <span>Beauty</span>
+                    </div>
+                    <div class="service-icon" style="--delay: 0.4s">
+                        <i class="fas fa-utensils"></i>
+                        <span>Restaurants</span>
+                    </div>
+                    <div class="service-icon" style="--delay: 0.6s">
+                        <i class="fas fa-dumbbell"></i>
+                        <span>Fitness</span>
+                    </div>
+                    <div class="service-icon" style="--delay: 0.8s">
+                        <i class="fas fa-briefcase"></i>
+                        <span>Professional</span>
+                    </div>
+                    <div class="service-icon" style="--delay: 1s">
+                        <i class="fas fa-home"></i>
+                        <span>Home Services</span>
+                    </div>
+                </div>
+                <div class="hero-phone">
+                    <div class="phone-mockup">
+                        <div class="phone-screen">
+                            <div class="app-header">
+                                <span class="app-title">Zapp</span>
+                                <i class="fas fa-bell"></i>
+                            </div>
+                            <div class="app-content">
+                                <div class="appointment-card">
+                                    <div class="appointment-icon">
+                                        <i class="fas fa-stethoscope"></i>
+                                    </div>
+                                    <div class="appointment-details">
+                                        <h4>Dr. Smith</h4>
+                                        <p>Today, 3:00 PM</p>
+                                    </div>
+                                </div>
+                                <div class="appointment-card">
+                                    <div class="appointment-icon">
+                                        <i class="fas fa-cut"></i>
+                                    </div>
+                                    <div class="appointment-details">
+                                        <h4>Hair Salon</h4>
+                                        <p>Tomorrow, 2:00 PM</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-wave">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" class="shape-fill"></path>
+                <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" class="shape-fill"></path>
+                <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" class="shape-fill"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Problem Statement -->
+    <section class="problem-section">
+        <div class="container">
+            <div class="problem-header">
+                <h2>The Appointment Booking Chaos</h2>
+                <p>Managing appointments across multiple apps is broken. Here's the reality:</p>
+            </div>
+            <div class="problem-stats">
+                <div class="problem-stat">
+                    <div class="problem-stat-number">
+                        <span class="counter" data-target="85">0</span>%
+                    </div>
+                    <p>People wait in lines monthly</p>
+                </div>
+                <div class="problem-stat">
+                    <div class="problem-stat-number">
+                        <span class="counter" data-target="126">0</span>%
+                    </div>
+                    <p>Increase in booking frustration</p>
+                </div>
+                <div class="problem-stat">
+                    <div class="problem-stat-number">
+                        <span class="counter" data-target="37">0</span>B
+                    </div>
+                    <p>Hours wasted annually</p>
+                </div>
+            </div>
+            <div class="problem-visual">
+                <div class="fragmented-apps">
+                    <h3>Before Zapp</h3>
+                    <div class="app-icons scattered">
+                        <div class="app-icon"><i class="fas fa-stethoscope"></i></div>
+                        <div class="app-icon"><i class="fas fa-cut"></i></div>
+                        <div class="app-icon"><i class="fas fa-utensils"></i></div>
+                        <div class="app-icon"><i class="fas fa-dumbbell"></i></div>
+                        <div class="app-icon"><i class="fas fa-briefcase"></i></div>
+                        <div class="app-icon"><i class="fas fa-home"></i></div>
+                    </div>
+                    <p class="chaos-text">Multiple apps, endless confusion</p>
+                </div>
+                <div class="unified-solution">
+                    <h3>With Zapp</h3>
+                    <div class="zapp-unified">
+                        <div class="unified-app">
+                            <img src="logo_cropped.png" alt="Zapp" class="unified-logo">
+                            <div class="unified-services">
+                                <i class="fas fa-stethoscope"></i>
+                                <i class="fas fa-cut"></i>
+                                <i class="fas fa-utensils"></i>
+                                <i class="fas fa-dumbbell"></i>
+                                <i class="fas fa-briefcase"></i>
+                                <i class="fas fa-home"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="solution-text">One app, endless possibilities</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How Zapp Works</h2>
+            <div class="how-it-works-content">
+                <div class="how-it-works-side">
+                    <h3>For Consumers</h3>
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-icon">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <div class="step-content">
+                                <h4>Browse</h4>
+                                <p>Find services across all categories in your area</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-icon">
+                                <i class="fas fa-calendar-check"></i>
+                            </div>
+                            <div class="step-content">
+                                <h4>Book</h4>
+                                <p>Schedule appointments with real-time availability</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="step-content">
+                                <h4>Show Up</h4>
+                                <p>Get reminders and enjoy your service</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="how-it-works-side">
+                    <h3>For Businesses</h3>
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-icon">
+                                <i class="fas fa-store"></i>
+                            </div>
+                            <div class="step-content">
+                                <h4>List</h4>
+                                <p>Add your services and availability to Zapp</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-icon">
+                                <i class="fas fa-tasks"></i>
+                            </div>
+                            <div class="step-content">
+                                <h4>Manage</h4>
+                                <p>Track bookings and manage your schedule</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="step-content">
+                                <h4>Grow</h4>
+                                <p>Reach more customers and increase revenue</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Categories -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">All Your Services, One Platform</h2>
+            <div class="services-grid">
+                <div class="service-card" data-category="healthcare">
+                    <div class="service-card-icon">
+                        <i class="fas fa-stethoscope"></i>
+                    </div>
+                    <h3>Healthcare</h3>
+                    <p>Doctors, dentists, specialists, and medical facilities</p>
+                    <div class="service-features">
+                        <span>Real-time availability</span>
+                        <span>Insurance integration</span>
+                        <span>Medical records sync</span>
+                    </div>
+                </div>
+                <div class="service-card" data-category="beauty">
+                    <div class="service-card-icon">
+                        <i class="fas fa-cut"></i>
+                    </div>
+                    <h3>Beauty & Wellness</h3>
+                    <p>Salons, spas, massage therapy, and wellness centers</p>
+                    <div class="service-features">
+                        <span>Service customization</span>
+                        <span>Therapist preferences</span>
+                        <span>Package deals</span>
+                    </div>
+                </div>
+                <div class="service-card" data-category="restaurants">
+                    <div class="service-card-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3>Restaurants</h3>
+                    <p>Fine dining, casual restaurants, and food experiences</p>
+                    <div class="service-features">
+                        <span>Table reservations</span>
+                        <span>Menu previews</span>
+                        <span>Special requests</span>
+                    </div>
+                </div>
+                <div class="service-card" data-category="fitness">
+                    <div class="service-card-icon">
+                        <i class="fas fa-dumbbell"></i>
+                    </div>
+                    <h3>Fitness</h3>
+                    <p>Gyms, personal trainers, yoga studios, and sports facilities</p>
+                    <div class="service-features">
+                        <span>Class schedules</span>
+                        <span>Equipment booking</span>
+                        <span>Trainer matching</span>
+                    </div>
+                </div>
+                <div class="service-card" data-category="professional">
+                    <div class="service-card-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h3>Professional Services</h3>
+                    <p>Consultants, lawyers, financial advisors, and experts</p>
+                    <div class="service-features">
+                        <span>Video consultations</span>
+                        <span>Document sharing</span>
+                        <span>Secure payments</span>
+                    </div>
+                </div>
+                <div class="service-card" data-category="home">
+                    <div class="service-card-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>Home Services</h3>
+                    <p>Cleaning, repairs, maintenance, and home improvement</p>
+                    <div class="service-features">
+                        <span>Service history</span>
+                        <span>Professional ratings</span>
+                        <span>Emergency bookings</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Features -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Why Choose Zapp?</h2>
+            <div class="features-grid">
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Real-Time Availability</h3>
+                    <p>See live availability across all services and book instantly without waiting for confirmations.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <h3>Single Dashboard</h3>
+                    <p>Manage all your appointments from one unified dashboard. No more juggling multiple apps.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    <h3>Smart Notifications</h3>
+                    <p>Automated reminders, updates, and personalized recommendations to never miss an appointment.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-credit-card"></i>
+                    </div>
+                    <h3>Integrated Payments</h3>
+                    <p>Seamless payment processing with multiple options and automatic receipt management.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>AI Recommendations</h3>
+                    <p>Get personalized service suggestions based on your preferences and booking history.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Secure & Private</h3>
+                    <p>Enterprise-grade security ensuring your personal information and payments are always protected.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Market Opportunity -->
+    <section class="market-opportunity">
+        <div class="container">
+            <div class="market-content">
+                <div class="market-text">
+                    <h2>Massive Market Opportunity</h2>
+                    <p>The appointment booking market is exploding, and India is leading the charge.</p>
+                    <div class="market-stats">
+                        <div class="market-stat">
+                            <div class="market-stat-value">
+                                $<span class="counter" data-target="1.5">0</span>B+
+                            </div>
+                            <div class="market-stat-label">Market Size by 2032</div>
+                        </div>
+                        <div class="market-stat">
+                            <div class="market-stat-value">
+                                <span class="counter" data-target="23">0</span>%
+                            </div>
+                            <div class="market-stat-label">Annual Growth Rate</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="market-visual">
+                    <div class="india-map">
+                        <div class="map-container">
+                            <i class="fas fa-map-marked-alt"></i>
+                            <div class="map-dots">
+                                <div class="dot" style="top: 30%; left: 25%"></div>
+                                <div class="dot" style="top: 50%; left: 60%"></div>
+                                <div class="dot" style="top: 70%; left: 40%"></div>
+                                <div class="dot" style="top: 40%; left: 75%"></div>
+                                <div class="dot" style="top: 60%; left: 30%"></div>
+                            </div>
+                        </div>
+                        <p>Starting in India, expanding globally</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- For Businesses -->
+    <section id="businesses" class="businesses">
+        <div class="container">
+            <h2 class="section-title">Transform Your Business</h2>
+            <div class="business-benefits">
+                <div class="benefit">
+                    <div class="benefit-icon">
+                        <i class="fas fa-user-slash"></i>
+                    </div>
+                    <h3>Reduce No-Shows</h3>
+                    <div class="benefit-stat">18-30% reduction</div>
+                    <p>Automated reminders and confirmations significantly reduce missed appointments.</p>
+                </div>
+                <div class="benefit">
+                    <div class="benefit-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Increase Bookings</h3>
+                    <div class="benefit-stat">40% more customers</div>
+                    <p>Reach new customers through our unified platform and smart recommendations.</p>
+                </div>
+                <div class="benefit">
+                    <div class="benefit-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>Streamline Operations</h3>
+                    <div class="benefit-stat">50% time saved</div>
+                    <p>Automate scheduling, payments, and customer management in one dashboard.</p>
+                </div>
+            </div>
+            
+            <div class="coming-soon-section">
+                <div class="coming-soon-content">
+                    <div class="coming-soon-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>Coming Soon</h3>
+                    <p class="coming-soon-description">
+                        We're building something amazing! Zapp is in active development and will launch soon. 
+                        Join our waitlist to be the first to know when we're ready to transform your business.
+                    </p>
+                    <div class="launch-timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-icon">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <h4>Development Phase</h4>
+                                <p>Building core features and partnerships</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <h4>Beta Testing</h4>
+                                <p>Early access for select partners</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-icon">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <h4>Public Launch</h4>
+                                <p>Full platform availability</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="early-access-benefits">
+                        <h4>Early Partner Benefits</h4>
+                        <div class="benefits-list">
+                            <span class="benefit-item">
+                                <i class="fas fa-star"></i>
+                                Free setup and onboarding
+                            </span>
+                            <span class="benefit-item">
+                                <i class="fas fa-percentage"></i>
+                                Discounted rates for first year
+                            </span>
+                            <span class="benefit-item">
+                                <i class="fas fa-headset"></i>
+                                Priority customer support
+                            </span>
+                            <span class="benefit-item">
+                                <i class="fas fa-chart-line"></i>
+                                Enhanced analytics dashboard
+                            </span>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-large" onclick="openBusinessModal()">
+                        <i class="fas fa-bell"></i>
+                        Get Notified When We Launch
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="logo_cropped.png" alt="Zapp Logo" class="footer-logo-img">
+                        <span class="footer-brand">Zapp</span>
+                    </div>
+                    <p>One app for every appointment. Simplifying bookings across healthcare, beauty, restaurants, and more.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#" onclick="openWaitlistModal()">Join Waitlist</a></li>
+                        <li><a href="#">Pricing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Business</h4>
+                    <ul>
+                        <li><a href="#businesses">For Businesses</a></li>
+                        <li><a href="#">Partner Program</a></li>
+                        <li><a href="#">API Documentation</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Press</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Stay Updated</h4>
+                    <p>Get the latest updates on Zapp's launch and features.</p>
+                    <div class="newsletter">
+                        <input type="email" placeholder="Enter your email" class="newsletter-input">
+                        <button class="btn btn-primary">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2024 Zapp. All rights reserved. | Privacy Policy | Terms of Service</p>
+                    <p class="made-in-india">🇮🇳 Built in India for the World</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Action Button -->
+    <button class="fab" onclick="openWaitlistModal()" id="fab">
+        <i class="fas fa-plus"></i>
+        <span class="fab-text">Join Waitlist</span>
+    </button>
+
+    <!-- Waitlist Modal -->
+    <div id="waitlistModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeWaitlistModal()">&times;</span>
+            <h2>Join the Zapp Waitlist</h2>
+            <p>Be among the first to experience the future of appointment booking.</p>
+            <form class="waitlist-form">
+                <input type="text" placeholder="Full Name" required>
+                <input type="email" placeholder="Email Address" required>
+                <input type="tel" placeholder="Phone Number" required>
+                <select required>
+                    <option value="">Select your primary interest</option>
+                    <option value="healthcare">Healthcare</option>
+                    <option value="beauty">Beauty & Wellness</option>
+                    <option value="restaurants">Restaurants</option>
+                    <option value="fitness">Fitness</option>
+                    <option value="professional">Professional Services</option>
+                    <option value="home">Home Services</option>
+                    <option value="all">All Services</option>
+                </select>
+                <button type="submit" class="btn btn-primary btn-large">Join Waitlist</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Business Modal -->
+    <div id="businessModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeBusinessModal()">&times;</span>
+            <h2>Get Early Access</h2>
+            <p>Be among the first businesses to join Zapp when we launch. Get notified about beta testing and early partner benefits.</p>
+            <form class="business-form">
+                <input type="text" placeholder="Business Name" required>
+                <input type="text" placeholder="Contact Person" required>
+                <input type="email" placeholder="Business Email" required>
+                <input type="tel" placeholder="Phone Number" required>
+                <select required>
+                    <option value="">Business Category</option>
+                    <option value="healthcare">Healthcare</option>
+                    <option value="beauty">Beauty & Wellness</option>
+                    <option value="restaurants">Restaurants</option>
+                    <option value="fitness">Fitness</option>
+                    <option value="professional">Professional Services</option>
+                    <option value="home">Home Services</option>
+                    <option value="other">Other</option>
+                </select>
+                <select required>
+                    <option value="">Business Size</option>
+                    <option value="single">Single Location</option>
+                    <option value="multiple">Multiple Locations (2-10)</option>
+                    <option value="enterprise">Enterprise (10+)</option>
+                </select>
+                <button type="submit" class="btn btn-primary btn-large">
+                    <i class="fas fa-bell"></i>
+                    Notify Me When Available
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

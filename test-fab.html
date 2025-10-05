@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test - Zapp FAB</title>
+    <style>
+        body {
+            background: #0a0a0a;
+            color: white;
+            font-family: Arial, sans-serif;
+            height: 200vh;
+            padding: 20px;
+        }
+        
+        .fab {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #00d4ff, #8b5cf6);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 8px 30px rgba(0, 212, 255, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            overflow: hidden;
+            opacity: 1;
+            pointer-events: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fabPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes fabPulse {
+            0%, 100% { 
+                box-shadow: 0 8px 30px rgba(0, 212, 255, 0.4);
+                transform: scale(1);
+            }
+            50% { 
+                box-shadow: 0 8px 40px rgba(0, 212, 255, 0.6);
+                transform: scale(1.05);
+            }
+        }
+        
+        .fab:hover {
+            transform: scale(1.1);
+            width: 180px;
+            border-radius: 30px;
+        }
+        
+        .fab-text {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 14px;
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity 0.3s ease 0.1s;
+        }
+
+        .fab:hover .fab-text {
+            opacity: 1;
+        }
+
+        .fab:hover i {
+            transform: translateX(-50px);
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <h1>Test Page - Scroll down to see if FAB is visible</h1>
+    <p>This is a test page to check if the Floating Action Button (FAB) is working properly.</p>
+    
+    <div style="margin-top: 1000px;">
+        <p>Scroll content - the FAB should be visible at bottom right</p>
+    </div>
+    
+    <!-- Floating Action Button -->
+    <button class="fab" onclick="alert('FAB clicked!')">
+        <i class="fas fa-plus"></i>
+        <span class="fab-text">Join Waitlist</span>
+    </button>
+</body>
+</html>
