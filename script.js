@@ -150,62 +150,118 @@ window.addEventListener('click', (e) => {
 });
 
 // Form submissions
-document.querySelector('.waitlist-form').addEventListener('submit', (e) => {
+document.querySelector('.waitlist-form').addEventListener('submit', async (e) => {
     e.preventDefault();
     
     // Get form data
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData);
+    data.type = 'user'; // Mark as user waitlist
     
-    // Simulate API call
+    // Get submit button
     const submitButton = e.target.querySelector('button[type="submit"]');
     const originalText = submitButton.textContent;
     
     submitButton.textContent = 'Joining...';
     submitButton.disabled = true;
     
-    setTimeout(() => {
-        submitButton.textContent = '✓ Welcome to Zapp!';
-        submitButton.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+    try {
+        // Send data to backend
+        const response = await fetch('/.netlify/functions/waitlist', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        });
+        
+        const result = await response.json();
+        
+        if (response.ok && result.success) {
+            submitButton.textContent = '✓ Welcome to Zapp!';
+            submitButton.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+            
+            setTimeout(() => {
+                closeWaitlistModal();
+                showNotification('Successfully joined the waitlist! We\'ll be in touch soon.', 'success');
+                e.target.reset();
+                submitButton.textContent = originalText;
+                submitButton.disabled = false;
+                submitButton.style.background = '';
+            }, 1500);
+        } else {
+            throw new Error(result.message || 'Failed to join waitlist');
+        }
+    } catch (error) {
+        console.error('Error submitting waitlist:', error);
+        submitButton.textContent = '❌ Error';
+        submitButton.style.background = 'linear-gradient(135deg, #ef4444, #dc2626)';
         
         setTimeout(() => {
-            closeWaitlistModal();
-            showNotification('Successfully joined the waitlist! We\'ll be in touch soon.', 'success');
-            e.target.reset();
             submitButton.textContent = originalText;
             submitButton.disabled = false;
             submitButton.style.background = '';
-        }, 1500);
-    }, 1000);
+        }, 2000);
+        
+        showNotification('Failed to join waitlist. Please try again.', 'error');
+    }
 });
 
-document.querySelector('.business-form').addEventListener('submit', (e) => {
+document.querySelector('.business-form').addEventListener('submit', async (e) => {
     e.preventDefault();
     
     // Get form data
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData);
+    data.type = 'business'; // Mark as business waitlist
     
-    // Simulate API call
+    // Get submit button
     const submitButton = e.target.querySelector('button[type="submit"]');
     const originalText = submitButton.textContent;
     
     submitButton.textContent = 'Processing...';
     submitButton.disabled = true;
     
-    setTimeout(() => {
-        submitButton.textContent = '✓ Welcome Partner!';
-        submitButton.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+    try {
+        // Send data to backend
+        const response = await fetch('/.netlify/functions/waitlist', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        });
+        
+        const result = await response.json();
+        
+        if (response.ok && result.success) {
+            submitButton.textContent = '✓ Welcome Partner!';
+            submitButton.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+            
+            setTimeout(() => {
+                closeBusinessModal();
+                showNotification('Thank you for your interest! Our team will contact you within 24 hours.', 'success');
+                e.target.reset();
+                submitButton.textContent = originalText;
+                submitButton.disabled = false;
+                submitButton.style.background = '';
+            }, 1500);
+        } else {
+            throw new Error(result.message || 'Failed to submit application');
+        }
+    } catch (error) {
+        console.error('Error submitting business form:', error);
+        submitButton.textContent = '❌ Error';
+        submitButton.style.background = 'linear-gradient(135deg, #ef4444, #dc2626)';
         
         setTimeout(() => {
-            closeBusinessModal();
-            showNotification('Thank you for your interest! Our team will contact you within 24 hours.', 'success');
-            e.target.reset();
             submitButton.textContent = originalText;
             submitButton.disabled = false;
             submitButton.style.background = '';
-        }, 1500);
-    }, 1000);
+        }, 2000);
+        
+        showNotification('Failed to submit application. Please try again.', 'error');
+    }
 });
 
 // Newsletter subscription
@@ -247,7 +303,7 @@ function showNotification(message, type = 'info') {
     notification.className = `notification notification-${type}`;
     notification.innerHTML = `
         <div class="notification-content">
-            <i class="fas fa-${type === 'success' ? 'check-circle' : 'info-circle'}"></i>
+            <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
             <span>${message}</span>
             <button class="notification-close" onclick="this.parentElement.parentElement.remove()">
                 <i class="fas fa-times"></i>
@@ -256,11 +312,17 @@ function showNotification(message, type = 'info') {
     `;
     
     // Add styles
+    const bgColor = type === 'success' ? 
+        'linear-gradient(135deg, #10b981, #059669)' : 
+        type === 'error' ? 
+        'linear-gradient(135deg, #ef4444, #dc2626)' : 
+        'linear-gradient(135deg, #00d4ff, #8b5cf6)';
+        
     notification.style.cssText = `
         position: fixed;
         top: 100px;
         right: 20px;
-        background: ${type === 'success' ? 'linear-gradient(135deg, #10b981, #059669)' : 'linear-gradient(135deg, #00d4ff, #8b5cf6)'};
+        background: ${bgColor};
         color: white;
         padding: 16px 20px;
         border-radius: 12px;
