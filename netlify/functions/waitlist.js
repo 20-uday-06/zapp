@@ -41,17 +41,33 @@ exports.handler = async (event, context) => {
     const data = JSON.parse(event.body);
     console.log('Parsed data:', data);
     
-    // Validate required fields
-    if (!data.email || !data.name) {
-      return {
-        statusCode: 400,
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Headers': 'Content-Type',
-          'Access-Control-Allow-Methods': 'POST, OPTIONS'
-        },
-        body: JSON.stringify({ error: 'Name and email are required' })
-      };
+    // Validate required fields based on type
+    if (data.type === 'business') {
+      if (!data.email || !data.businessName || !data.contactPerson) {
+        console.log('Business validation failed:', { email: !!data.email, businessName: !!data.businessName, contactPerson: !!data.contactPerson });
+        return {
+          statusCode: 400,
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': 'Content-Type',
+            'Access-Control-Allow-Methods': 'POST, OPTIONS'
+          },
+          body: JSON.stringify({ error: 'Business name, contact person, and email are required' })
+        };
+      }
+    } else {
+      if (!data.email || !data.name) {
+        console.log('User validation failed:', { email: !!data.email, name: !!data.name });
+        return {
+          statusCode: 400,
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': 'Content-Type',
+            'Access-Control-Allow-Methods': 'POST, OPTIONS'
+          },
+          body: JSON.stringify({ error: 'Name and email are required' })
+        };
+      }
     }
 
     // Check if MONGODB_URI is set
