@@ -622,10 +622,10 @@
             <h2>Join the Zapp Waitlist</h2>
             <p>Be among the first to experience the future of appointment booking.</p>
             <form class="waitlist-form">
-                <input type="text" placeholder="Full Name" required>
-                <input type="email" placeholder="Email Address" required>
-                <input type="tel" placeholder="Phone Number" required>
-                <select required>
+                <input type="text" name="name" placeholder="Full Name" required>
+                <input type="email" name="email" placeholder="Email Address" required>
+                <input type="tel" name="phone" placeholder="Phone Number" required>
+                <select name="interest" required>
                     <option value="">Select your primary interest</option>
                     <option value="healthcare">Healthcare</option>
                     <option value="beauty">Beauty & Wellness</option>
@@ -647,11 +647,11 @@
             <h2>Get Early Access</h2>
             <p>Be among the first businesses to join Zapp when we launch. Get notified about beta testing and early partner benefits.</p>
             <form class="business-form">
-                <input type="text" placeholder="Business Name" required>
-                <input type="text" placeholder="Contact Person" required>
-                <input type="email" placeholder="Business Email" required>
-                <input type="tel" placeholder="Phone Number" required>
-                <select required>
+                <input type="text" name="businessName" placeholder="Business Name" required>
+                <input type="text" name="contactPerson" placeholder="Contact Person" required>
+                <input type="email" name="email" placeholder="Business Email" required>
+                <input type="tel" name="phone" placeholder="Phone Number" required>
+                <select name="category" required>
                     <option value="">Business Category</option>
                     <option value="healthcare">Healthcare</option>
                     <option value="beauty">Beauty & Wellness</option>
@@ -661,7 +661,7 @@
                     <option value="home">Home Services</option>
                     <option value="other">Other</option>
                 </select>
-                <select required>
+                <select name="businessSize" required>
                     <option value="">Business Size</option>
                     <option value="single">Single Location</option>
                     <option value="multiple">Multiple Locations (2-10)</option>
