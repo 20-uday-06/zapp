@@ -188,8 +188,8 @@ document.querySelector('.waitlist-form').addEventListener('submit', async (e) =>
                 submitButton.textContent = originalText;
                 submitButton.disabled = false;
                 submitButton.style.background = '';
-                // Refresh counts after successful submission
-                updateHeroStats();
+                // Refresh counts after successful submission (temporarily disabled for debugging)
+                // updateHeroStats();
             }, 1500);
         } else {
             throw new Error(result.message || 'Failed to join waitlist');
@@ -247,8 +247,8 @@ document.querySelector('.business-form').addEventListener('submit', async (e) =>
                 submitButton.textContent = originalText;
                 submitButton.disabled = false;
                 submitButton.style.background = '';
-                // Refresh counts after successful submission
-                updateHeroStats();
+                // Refresh counts after successful submission (temporarily disabled for debugging)
+                // updateHeroStats();
             }, 1500);
         } else {
             throw new Error(result.message || 'Failed to submit application');
@@ -460,45 +460,53 @@ async function fetchWaitlistCounts() {
 
 // Function to update hero stats with real or default values
 async function updateHeroStats() {
-    const counts = await fetchWaitlistCounts();
-    
-    // Find stat elements
-    const usersStat = document.querySelector('[data-stat="users"]');
-    const businessesStat = document.querySelector('[data-stat="businesses"]');
-    const totalStat = document.querySelector('[data-stat="total"]');
-    
-    if (counts) {
-        // Use real counts from database
-        if (usersStat) {
+    try {
+        const counts = await fetchWaitlistCounts();
+        
+        // Find stat elements
+        const usersStat = document.querySelector('[data-stat="users"]');
+        const businessesStat = document.querySelector('[data-stat="businesses"]');
+        
+        if (counts && usersStat && businessesStat) {
+            // Use real counts from database
             usersStat.setAttribute('data-target', counts.totalUsers);
             animateCounter(usersStat, counts.totalUsers, 1500);
-        }
-        if (businessesStat) {
+            
             businessesStat.setAttribute('data-target', counts.totalBusinesses);
             animateCounter(businessesStat, counts.totalBusinesses, 1500);
+            
+            console.log('Updated stats with real counts:', counts);
+        } else {
+            // Use default values if API fails
+            useDefaultStats();
         }
-        if (totalStat) {
-            totalStat.setAttribute('data-target', counts.totalWaitlist);
-            animateCounter(totalStat, counts.totalWaitlist, 1500);
-        }
-        console.log('Updated stats with real counts:', counts);
-    } else {
-        // Use default values if API fails
-        const heroStats = document.querySelectorAll('.stat-number[data-target]');
-        heroStats.forEach((stat, index) => {
-            setTimeout(() => {
-                const target = parseInt(stat.getAttribute('data-target'));
-                animateCounter(stat, target, 1500);
-            }, index * 200);
-        });
-        console.log('Using default stat values');
+    } catch (error) {
+        console.error('Error updating hero stats:', error);
+        useDefaultStats();
     }
+}
+
+// Function to use default stat values
+function useDefaultStats() {
+    const heroStats = document.querySelectorAll('.stat-number[data-target]');
+    heroStats.forEach((stat, index) => {
+        setTimeout(() => {
+            const target = parseInt(stat.getAttribute('data-target')) || 0;
+            animateCounter(stat, target, 1500);
+        }, index * 200);
+    });
+    console.log('Using default stat values');
 }
 
 // Initialize hero stats animation on page load
 window.addEventListener('load', () => {
-    // Update stats with real counts
-    updateHeroStats();
+    // Use default stats for now (debugging)
+    useDefaultStats();
+    
+    // Try to update with real counts (non-blocking)
+    setTimeout(() => {
+        updateHeroStats();
+    }, 1000);
     
     // Add entrance animations
     const heroContent = document.querySelector('.hero-content');
